@@ -52,12 +52,10 @@ export class discord_plugin extends plugin<discord_config> {
 		});
 
 		this.bot.on(GatewayDispatchEvents.MessageUpdate, async (msg) => {
-			console.log(msg.data)
 			this.emit('edit_message', await conv.to_core(msg.api, msg.data));
 		});
 
 		this.bot.on(GatewayDispatchEvents.MessageDelete, async (msg) => {
-			console.log(msg.data)
 			this.emit('delete_message', await conv.to_core(msg.api, msg.data));
 		});
 

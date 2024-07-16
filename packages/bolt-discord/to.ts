@@ -36,9 +36,11 @@ export async function send_to_discord(
 		let wh;
 
 		if (edit_id) {
+			let toke = await api.webhooks.get(channel.data.id);
+			console.log(toke)
 			wh = await api.webhooks.editMessage(
 				channel.data.id,
-				channel.data.token,
+				toke.token,
 				edit_id,
 				msg,
 			);
@@ -62,7 +64,9 @@ export async function delete_on_discord(
 	id: string,
 ) {
 	try {
-		await api.webhooks.deleteMessage(channel.data.id, channel.data.token, id);
+		let toke = await api.webhooks.get(channel.data.id);
+		await api.webhooks.deleteMessage(channel.data.id, toke.token, id);
+		console.log(toke)
 		return id;
 	} catch (e) {
 		if (e.status === 404) {
