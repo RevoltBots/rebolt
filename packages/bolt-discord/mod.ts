@@ -47,20 +47,17 @@ export class discord_plugin extends plugin<discord_config> {
 
 	private setup_events() {
 		this.bot.on(GatewayDispatchEvents.MessageCreate, async (msg) => {
-			console.log(msg.data)
 			if (msg.data.author.bot) return;
 			this.emit('create_message', await conv.to_core(msg.api, msg.data));
 		});
 
 		this.bot.on(GatewayDispatchEvents.MessageUpdate, async (msg) => {
 			console.log(msg.data)
-			if (msg.data.author.bot) return;
 			this.emit('edit_message', await conv.to_core(msg.api, msg.data));
 		});
 
 		this.bot.on(GatewayDispatchEvents.MessageDelete, async (msg) => {
 			console.log(msg.data)
-			if (msg.data.author.bot) return;
 			this.emit('delete_message', await conv.to_core(msg.api, msg.data));
 		});
 
